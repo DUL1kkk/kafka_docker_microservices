@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        acks: 1
+        spring:
+          json:
+            add:
+              type:
+                headers: false
+
+topic:
+  vip-order: vip-orders        # топик для VIP-заказов
+  regular-order: regular-orders  # топик для обычных заказов
+  warehouse-order: warehouse-orders  # добавляем топик для склада
+  manager-order: manager-orders    # добавляем топик для начальника
+  accounting-order: accounting-orders  # добавляем топик для бухгалтерии
+
