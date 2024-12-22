@@ -39,12 +39,16 @@ public class Producer {
         // Отправка в другие топики, такие как manager и accounting
         ManageOrderDto managerOrder = orderConverter.toManageOrderDto(order);
         AccountingOrderDto accountingOrder = orderConverter.toAccountingOrderDto(order);
+        DatabaseDto databaseOrder=orderConverter.toDatabaseDto(order);
 
-        kafkaMessagingService.sendToManager(managerOrder);
-        log.info("Order sent to manager-topic: {}", managerOrder);
+        kafkaMessagingService.sendToDatabase(databaseOrder);
+        log.info("Order sent to manager-topic: {}", databaseOrder);
+
 
         kafkaMessagingService.sendToAccounting(accountingOrder);
         log.info("Order sent to accounting-topic: {}", accountingOrder);
+        kafkaMessagingService.sendToManager(managerOrder);
+        log.info("Order sent to send-order-event-topic: {}", managerOrder);
     }
 }
 

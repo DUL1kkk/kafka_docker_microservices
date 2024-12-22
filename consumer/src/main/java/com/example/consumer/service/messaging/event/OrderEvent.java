@@ -16,5 +16,8 @@ public class OrderEvent {
     private String barCode;
     private int quantity;
     private BigDecimal price;
+    private String orderCategory;  // Добавлено поле для категории заказа
+    private boolean vip;           // Добавлено поле для VIP статуса
+    private String vipLevel;       // Добавлено поле для уровня VIP
 
 }

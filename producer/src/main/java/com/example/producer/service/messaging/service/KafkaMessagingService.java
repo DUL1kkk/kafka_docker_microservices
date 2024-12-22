@@ -1,5 +1,6 @@
 package com.example.producer.service.messaging.service;
 
+import com.example.producer.service.messaging.event.OrderSendEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ public class KafkaMessagingService {
 
     @Value("${topic.vip-order}")
     private String vipTopic;
+    @Value("send-order-event")
+    private String databaseTopic;
 
     @Value("${topic.regular-order}")
     private String regularTopic;
@@ -47,5 +50,12 @@ public class KafkaMessagingService {
 
     public void sendToAccounting(AccountingOrderDto accountingOrder) {
         kafkaTemplate.send(accountingTopic, accountingOrder);
+    }
+
+    public void sendOrder(OrderSendEvent order) {
+    }
+
+    public void sendToDatabase(DatabaseDto databaseOrder) {
+        kafkaTemplate.send(databaseTopic, databaseOrder);
     }
 }

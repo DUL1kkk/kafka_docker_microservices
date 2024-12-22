@@ -1,10 +1,6 @@
 package com.example.producer.service.messaging.service;
 
-import com.example.producer.dto.AccountingOrderDto;
-import com.example.producer.dto.ManageOrderDto;
-import com.example.producer.dto.WarehouseOrderDto;
-import com.example.producer.dto.RegularOrderDto;
-import com.example.producer.dto.VipOrderDto;
+import com.example.producer.dto.*;
 import com.example.producer.model.Order;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -35,5 +31,9 @@ public class OrderConverter {
         VipOrderDto dto = modelMapper.map(order, VipOrderDto.class);
         dto.setVipLevel(order.getVipLevel()); // Заполняем vipLevel
         return dto;
+    }
+
+    public DatabaseDto toDatabaseDto(Order order) {
+        return modelMapper.map(order, DatabaseDto.class);
     }
 }
